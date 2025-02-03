@@ -48,7 +48,7 @@ function Subscription() {
             Level up productivity with more pickups and more convenience.
           </div>
           <button className="bg-white text-green-600/70 w-full h-10 rounded-2xl text-normal text-center mb-6">
-            Your current plan
+            Get Plus
           </button>
           <ul className="flex flex-col justify-start gap-3 text-sm">
             <li className="flex justify-start items-center gap-3">
@@ -72,7 +72,7 @@ function Subscription() {
           </ul>
         </div>
         <div className="h-110 w-80 rounded-2xl shadow-[0px_5px_15px_rgba(0,0,0,0.35)] p-5">
-          <p className="font-semibold text-2xl mb-3">Free</p>
+          <p className="font-semibold text-2xl mb-3">Pro</p>
           <div className="flex gap-1 mb-6">
             <span className="text-gray-400 text-sm">रु</span>
             <span className="text-5xl">750</span>
@@ -85,7 +85,7 @@ function Subscription() {
             Premium waste collection with maximum flexibility
           </div>
           <button className="bg-green-600/70 text-white w-full h-10 rounded-2xl text-normal text-center mb-6">
-            Your current plan
+            Get Pro
           </button>
           <ul className="flex flex-col justify-start gap-3 text-sm">
             <li className="flex justify-start items-center gap-3">
