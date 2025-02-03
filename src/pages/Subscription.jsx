@@ -1,8 +1,15 @@
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { IoCloseSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 function Subscription() {
   return (
-    <div className="flex flex-col justify-center items-center h-screen gap-20">
+    <div className="relative flex flex-col justify-center items-center h-screen gap-20">
+      <button className="absolute top-10 right-10 text-2xl cursor-pointer">
+        <Link to={"/"}>
+          <IoCloseSharp />
+        </Link>
+      </button>
       <div>
         <h1 className="poppins-font text-4xl font-semibold">
           Upgrade your plan
@@ -22,7 +29,10 @@ function Subscription() {
           <div className="text-normal leading-none mb-6">
             Basic waste collection, keeping city cleaner.
           </div>
-          <button className="bg-green-600/70 text-white w-full h-10 rounded-2xl text-normal text-center mb-6">
+          <button
+            className="bg-green-600/50 text-white w-full h-10 rounded-2xl text-normal text-center mb-6 cursor-not-allowed"
+            disabled
+          >
             Your current plan
           </button>
           <ul className="flex flex-col justify-start gap-3 text-sm">
@@ -47,7 +57,7 @@ function Subscription() {
           <div className="text-normal leading-none mb-6">
             Level up productivity with more pickups and more convenience.
           </div>
-          <button className="bg-white text-green-600/70 w-full h-10 rounded-2xl text-normal text-center mb-6">
+          <button className="bg-white text-green-600/70 w-full h-10 rounded-2xl text-normal text-center mb-6 cursor-pointer">
             Get Plus
           </button>
           <ul className="flex flex-col justify-start gap-3 text-sm">
@@ -84,7 +94,7 @@ function Subscription() {
           <div className="text-normal leading-none mb-6">
             Premium waste collection with maximum flexibility
           </div>
-          <button className="bg-green-600/70 text-white w-full h-10 rounded-2xl text-normal text-center mb-6">
+          <button className="bg-green-600/70 text-white w-full h-10 rounded-2xl text-normal text-center mb-6 cursor-pointer">
             Get Pro
           </button>
           <ul className="flex flex-col justify-start gap-3 text-sm">

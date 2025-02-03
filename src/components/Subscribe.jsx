@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Subscribe() {
   return (
     <div className="flex flex-col justify-center items-center gap-5 p-20 ">
@@ -12,7 +14,7 @@ function Subscribe() {
         </p>
       </div>
       <button className=" bg-green-600 text-white rounded-2xl py-2 px-5 poppins-font font-semibold text-center hover:scale-120 transition-all ease-in-out cursor-pointer w-40 text-sm">
-        Subscribe
+        <Link to={"/subscribe"}>Subscribe</Link>
       </button>
     </div>
   );
