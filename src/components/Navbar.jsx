@@ -1,5 +1,6 @@
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -13,7 +14,7 @@ function Navbar() {
             Home
           </li>
           <li className="cursor-pointer duration-200 transition-all hover:text-gray-300">
-            <Link
+            <ScrollLink
               to="services"
               spy={true}
               smooth={true}
@@ -21,10 +22,10 @@ function Navbar() {
               offset={-39}
             >
               Services
-            </Link>
+            </ScrollLink>
           </li>
           <li className="cursor-pointer duration-200 transition-all hover:text-gray-300">
-            <Link
+            <ScrollLink
               to="about"
               spy={true}
               smooth={true}
@@ -32,18 +33,20 @@ function Navbar() {
               offset={-39}
             >
               About Us
-            </Link>
+            </ScrollLink>
           </li>
           <li className="cursor-pointer duration-200 transition-all hover:text-gray-300">
-            <Link to="contact" spy={true} smooth={true} duration={500}>
+            <ScrollLink to="contact" spy={true} smooth={true} duration={500}>
               Contact
-            </Link>
+            </ScrollLink>
           </li>
         </ul>
       </div>
-      <button className="cursor-pointer text-center bg-white rounded-xl p-2 text-green-600 flex justify-center items-center gap-2 ease-in-out transition-all hover:scale-110">
-        Login
-        <FaRegCircleUser />
+      <button className="cursor-pointer text-center bg-white rounded-xl p-2 text-green-600 ease-in-out transition-all hover:scale-110">
+        <Link to={"/login"} className="flex justify-center items-center gap-2">
+          Login
+          <FaRegCircleUser />
+        </Link>
       </button>
     </nav>
   );
