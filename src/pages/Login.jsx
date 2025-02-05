@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,7 @@ function Login() {
           <div className="flex flex-col justify-start gap-1 mb-4">
             <label>Password</label>
             <input
-              type="password"
+              type={isOpen ? "text" : "password"}
               placeholder="******"
               className="relative border border-gray-400 rounded-xl h-10 p-3 w-96 focus:outline-green-600 focus:placeholder-transparent"
             />
@@ -67,7 +68,9 @@ function Login() {
 
           <div className="flex justify-center items-center gap-2 text-sm w-96">
             <p className="text-sm text-black/50">Don&apos;t have an account?</p>
-            <p className="text-green-600 cursor-pointer">Sign up for free!</p>
+            <p className="text-green-600 cursor-pointer">
+              <Link to={"/singup"}>Sign up for free!</Link>
+            </p>
           </div>
         </div>
       </form>
