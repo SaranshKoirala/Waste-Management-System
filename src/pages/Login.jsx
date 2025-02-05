@@ -69,7 +69,7 @@ function Login() {
           <div className="flex justify-center items-center gap-2 text-sm w-96">
             <p className="text-sm text-black/50">Don&apos;t have an account?</p>
             <p className="text-green-600 cursor-pointer">
-              <Link to={"/singup"}>Sign up for free!</Link>
+              <Link to={"/signup"}>Sign up for free!</Link>
             </p>
           </div>
         </div>
