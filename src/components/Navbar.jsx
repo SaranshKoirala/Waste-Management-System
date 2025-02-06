@@ -1,8 +1,15 @@
 import { Link as ScrollLink } from "react-scroll";
-import { FaRegCircleUser } from "react-icons/fa6";
+// import { FaRegCircleUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Navbar() {
+  const [showModal, setShowModal] = useState(false);
+
+  // function handleModal() {
+  //   setShowModal((modal) => !modal);
+  // }
+
   return (
     <nav className=" w-full flex justify-between items-center text-white poppins-font px-5  ">
       <div>
@@ -42,12 +49,42 @@ function Navbar() {
           </li>
         </ul>
       </div>
-      <button className="cursor-pointer text-center bg-white rounded-xl p-2 text-green-600 ease-in-out transition-all hover:scale-110">
-        <Link to={"/login"} className="flex justify-center items-center gap-2">
-          Login
-          <FaRegCircleUser />
-        </Link>
-      </button>
+      <div className="flex justify-center items-center gap-2">
+        <button className="cursor-pointer p-2 text-white ">
+          <Link
+            to={"/signup"}
+            className="flex justify-center items-center gap-2"
+          >
+            Sign Up
+          </Link>
+        </button>
+        <button
+          className="relative cursor-pointer border-1 py-1 px-3 text-green-600 bg-white"
+          onMouseEnter={() => setShowModal(true)}
+        >
+          <Link
+            to={"/login"}
+            className="flex justify-center items-center gap-2"
+          >
+            Login
+            {/* <FaRegCircleUser /> */}
+          </Link>
+        </button>
+
+        {showModal && (
+          <div
+            className="absolute top-16 right-5 bg-white text-black/70 flex flex-col justify-center items-center w-30 py-2"
+            onMouseLeave={() => setShowModal(false)}
+          >
+            <Link to={"/login"} className="border-b-1 border-gray-300 w-[80%]">
+              <p className=" text-center">User</p>
+            </Link>
+            <Link to={"/login/admin"}>
+              <p className="text-center">Admin</p>
+            </Link>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

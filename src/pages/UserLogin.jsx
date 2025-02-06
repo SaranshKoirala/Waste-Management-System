@@ -3,7 +3,7 @@ import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-function Login() {
+function UserLogin() {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleShowPassword(e) {
@@ -80,4 +80,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default UserLogin;
