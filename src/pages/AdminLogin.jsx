@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router-dom";
 
 function AdminLogin() {
   const [isOpen, setIsOpen] = useState(false);
