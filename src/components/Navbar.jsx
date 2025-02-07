@@ -62,13 +62,8 @@ function Navbar() {
           className="relative cursor-pointer border-1 py-1 px-3 text-green-600 bg-white"
           onMouseEnter={() => setShowModal(true)}
         >
-          <Link
-            to={"/login"}
-            className="flex justify-center items-center gap-2"
-          >
-            Login
-            {/* <FaRegCircleUser /> */}
-          </Link>
+          Login
+          {/* <FaRegCircleUser /> */}
         </button>
 
         {showModal && (

@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import Subscription from "./pages/Subscription";
 import AdminLogin from "./pages/AdminLogin";
+import SchedulePickup from "./pages/SchedulePickup";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/login" element={<UserLogin />} />
       <Route path="/login/admin" element={<AdminLogin />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/schedulepickup" element={<SchedulePickup />} />
       <Route path="/subscribe" element={<Subscription />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
