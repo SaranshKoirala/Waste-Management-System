@@ -64,7 +64,12 @@ function SchedulePickup() {
           <p className="font-light text-3xl text-end ">Let’s Tidy Up,</p>
           <p className=" text-4xl font-semibold">WASTE TRUCK IS READY!</p>
         </div>
-        <img src="/truck-1.webp" alt="truckimage" width={"600px"} />
+        <img
+          src="/truck-1.webp"
+          alt="truckimage"
+          width={"600px"}
+          loading="lazy"
+        />
       </div>
       <div className="flex flex-col p-10 gap-10">
         <div className="text-gray-900  ">
