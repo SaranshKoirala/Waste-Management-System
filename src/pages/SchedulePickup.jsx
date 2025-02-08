@@ -11,6 +11,8 @@ function SchedulePickup() {
   const [pickupTime, setPickupTime] = useState("Morning");
   const [wasteType, setWasteType] = useState("Biodegradable");
 
+  const isOpen = contact || streetName || wardNumber || pickupDate;
+
   function handleContactNumber(e) {
     const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
     setContact(value);
@@ -163,17 +165,18 @@ function SchedulePickup() {
               </option>
             </select>
           </div>
-          <div className="flex justify-center items-center gap-20 w-96 -mb-6">
-            <button
-              className="w-30 cursor-pointer bg-gray-600 hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all"
-              onClick={handleCancelBtn}
-            >
-              Cancel
-            </button>
-
+          <div className="flex justify-start items-center gap-20 w-96 -mb-6">
             <button className="w-30 cursor-pointer bg-green-600 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all">
               Submit
             </button>
+            {isOpen && (
+              <button
+                className="w-30 cursor-pointer bg-gray-600 hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all"
+                onClick={handleCancelBtn}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </form>
       </div>
