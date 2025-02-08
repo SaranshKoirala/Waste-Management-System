@@ -53,8 +53,9 @@ function About() {
           )}
           <img
             className="rounded-3xl transition-transform duration-500 ease-in-out"
-            src={`/gallery/gallery-${count}.jpg`}
+            src={`/gallery/gallery-${count}.webp`}
             width={"350px"}
+            loading="lazy"
             // height={"10px"}
           />
           <div className="flex gap-3">

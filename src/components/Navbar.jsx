@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <nav className=" w-full flex justify-between items-center text-white poppins-font px-5  ">
       <div>
-        <img src="/logo2.png" width={"70px"} />
+        <img src="/logo2.webp" width={"70px"} />
       </div>
       <div className=" flex justify-center items-center">
         <ul className="flex gap-20 ">

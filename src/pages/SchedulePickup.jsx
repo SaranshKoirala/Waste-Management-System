@@ -57,14 +57,14 @@ function SchedulePickup() {
   return (
     <div className="bg-[url(/gradient-1.jpg)] bg-cover bg-center min-h-screen max-w-screen p-5">
       <Link to={"/"}>
-        <img src="logo2.png" width={"70px"} />
+        <img src="logo2.webp" width={"70px"} />
       </Link>
       <div className="flex justify-end items-center -m-25 -mr-3">
         <div className="poppins-font -mr-5 text-green-950">
           <p className="font-light text-3xl text-end ">Let’s Tidy Up,</p>
           <p className=" text-4xl font-semibold">WASTE TRUCK IS READY!</p>
         </div>
-        <img src="/truck-1.png" alt="truckimage" width={"600px"} />
+        <img src="/truck-1.webp" alt="truckimage" width={"600px"} />
       </div>
       <div className="flex flex-col p-10 gap-10">
         <div className="text-gray-900  ">

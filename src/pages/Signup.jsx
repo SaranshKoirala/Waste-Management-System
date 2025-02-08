@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Signup() {
   return (
-    <form className=" h-screen w-screen flex flex-col justify-center items-center bg-[url(/bnp1.jpg)] bg-center bg-cover">
+    <form className=" h-screen w-screen flex flex-col justify-center items-center bg-[url(/bnp1.webp)] bg-center bg-cover">
       <div className="flex flex-col justify-center items-center gap-2 mb-6">
         <h1 className="poppins-font text-5xl w-full text-center font-semibold">
           Join our community!

@@ -11,7 +11,12 @@ function AdminLogin() {
   }
   return (
     <div className="flex justify-center items-center w-[100%] h-screen gap-5 ">
-      <img src="/admin-img.jpg" width={"600px"} className="p-4" />
+      <img
+        src="/admin-img.webp"
+        width={"600px"}
+        className="p-4"
+        loading="lazy"
+      />
       <div className="border-1 border-gray-300 h-[85%]"></div>
       <form className="w-[600px] h-screen flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center gap-2 mb-6">

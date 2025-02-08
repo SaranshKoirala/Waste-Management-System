@@ -62,7 +62,7 @@ function UserLogin() {
             Sign in
           </button>
           <div className="border border-gray-400 rounded-xl h-10 p-3 flex justify-center items-center gap-2 mb-4 w-96 cursor-pointer">
-            <img src="/google.png" width={"20px"} />
+            <img src="/google.webp" width={"20px"} loading="lazy" />
             <div>Sign in with Google</div>
           </div>
 
@@ -75,7 +75,7 @@ function UserLogin() {
         </div>
       </form>
 
-      <img src="/cleaning-login.jpg" width={"735px"} />
+      <img src="/cleaning-login.webp" width={"735px"} />
     </div>
   );
 }

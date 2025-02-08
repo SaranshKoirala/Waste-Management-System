@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 
 function Hero() {
   return (
-    <div className="relative bg-[url(/bg-image.jpg)] bg-cover bg-center h-screen mb-30">
+    <div className="relative bg-[url(/bg-image.webp)] bg-cover bg-center h-screen mb-30">
       <Navbar />
       <h1 className="absolute poppins-font font-extrabold left-30 top-70 text-white text-7xl  w-[550px] text-center leading-18 align-middle">
         WASTE MANAGEMENT SYSTEM
