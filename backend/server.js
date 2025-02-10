@@ -1,10 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import userRoute from "./Routes/userRoute.js";
-import authRoute from "./Routes/authRoute.js";
-// import cors from "cors";
-// import cookieParser from "cookie-parser";
+import UserRoute from "./Routes/UserRoute.js";
+import AuthRoute from "./Routes/AuthRoute.js";
 
 dotenv.config();
 const app = express();
@@ -13,13 +11,11 @@ const app = express();
 connectDB();
 
 // Middleware
-// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-// app.use(express.json());
-// app.use(cookieParser());
+app.use(express.json());
 
 // Routes
-app.use("/api/auth", authRoute);
-app.use("api/user", userRoute);
+app.use("/api/user", UserRoute);
+app.use("/api/auth", AuthRoute);
 
 //Invalid routes
 app.use((req, res) => {
