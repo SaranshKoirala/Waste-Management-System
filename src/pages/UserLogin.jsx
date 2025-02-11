@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
@@ -5,10 +6,15 @@ import { Link } from "react-router-dom";
 
 function UserLogin() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState("");
 
-  function handleShowPassword(e) {
+  async function handleShowPassword(e) {
     e.preventDefault();
     setIsOpen((isOpen) => !isOpen);
+
+    try {
+      const response = await axios.get("http://localhost:3000/api/user/:id");
+    } catch (error) {}
   }
 
   return (
