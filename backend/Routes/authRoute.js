@@ -1,9 +1,21 @@
 import express from "express";
 import validator from "validator";
-import User from "../Model/UserModel.js";
+import User from "../model/UserModel.js";
 import bcrypt from "bcryptjs";
+import tokenAuth from "../middleware/tokenAuth.js";
 
 const route = express.Router();
+
+route.get("/", tokenAuth, (req, res) => {
+  try {
+    const { name, email } = req.user;
+    res
+      .status(200)
+      .json({ message: "User is Verified!!", user: { name, email } });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 route.post("/login", async (req, res) => {
   try {
@@ -25,7 +37,7 @@ route.post("/login", async (req, res) => {
     //checking if the password is valid
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials!" });
+      return res.status(401).json({ message: "Invalid Password!" });
     }
 
     //token generate
@@ -45,6 +57,7 @@ route.post("/login", async (req, res) => {
         id: user._id,
         email: user.email,
         name: user.name,
+        role: user.role,
       },
     });
   } catch (error) {

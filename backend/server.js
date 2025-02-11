@@ -1,8 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import UserRoute from "./Routes/UserRoute.js";
-import AuthRoute from "./Routes/AuthRoute.js";
+import UserRoute from "./routes/UserRoute.js";
+import AuthRoute from "./routes/AuthRoute.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api/user", UserRoute);
