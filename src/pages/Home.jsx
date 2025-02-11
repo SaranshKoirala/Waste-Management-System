@@ -11,17 +11,19 @@ function Home() {
   const { setUser, setIsAuthenticated } = useContext(UserContext);
   useEffect(() => {
     async function fetch() {
-      try {
-        const token = localStorage.getItem("user");
-        const response = await axios.get("http://localhost:3000/api/auth", {
-          headers: {
-            Authorization: token,
-          },
-        });
-        setUser(response.data.user);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.log("Error:", error.message);
+      const token = localStorage.getItem("user");
+      if (token) {
+        try {
+          const response = await axios.get("http://localhost:3000/api/auth", {
+            headers: {
+              Authorization: token,
+            },
+          });
+          setUser(response.data.user);
+          setIsAuthenticated(true);
+        } catch (error) {
+          console.log("Error:", error.message);
+        }
       }
     }
     fetch();
