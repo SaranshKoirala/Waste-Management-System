@@ -1,12 +1,26 @@
 import { Link as ScrollLink } from "react-scroll";
-// import { FaRegCircleUser } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../Contexts/UserContext";
+import { FiUser } from "react-icons/fi";
+import { IoLogOut } from "react-icons/io5";
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
-  const { isAuthenticated, user } = useContext(UserContext);
+  const { isAuthenticated, user, setUser, setIsAuthenticated } =
+    useContext(UserContext);
+  const navigate = useNavigate();
+
+  function handleShowModal() {
+    setShowModal((modal) => !modal);
+  }
+
+  function handleLogoutBtn() {
+    localStorage.removeItem("user");
+    setUser(null);
+    setIsAuthenticated(false);
+    navigate("/login");
+  }
 
   return (
     <nav className=" w-full flex justify-between items-center text-white poppins-font px-5  ">
@@ -49,7 +63,31 @@ function Navbar() {
       </div>
 
       {isAuthenticated ? (
-        <div>Welcome, {user?.name}</div>
+        <div className="flex justify-center items-center gap-2">
+          <div
+            className="relative w-8 h-8 rounded-full bg-white text-black flex justify-center items-center text-xl cursor-pointer"
+            onClick={handleShowModal}
+          >
+            <FiUser />
+          </div>
+          {showModal && (
+            <div className="absolute top-14 right-5 bg-white text-black/70 flex flex-col justify-start px-3 py-2 w-50 rounded-sm">
+              <Link to={"/profile"} className="border-b-1 border-gray-300 ">
+                <p className=" text-center justify-self-start p-1">
+                  {user?.name}
+                </p>
+              </Link>
+
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={handleLogoutBtn}
+              >
+                <IoLogOut className="text-xl" />
+                <p className="text-center p-1">Log Out</p>
+              </div>
+            </div>
+          )}
+        </div>
       ) : (
         <div className="flex justify-center items-center gap-2">
           <button className="cursor-pointer p-2 text-white ">
@@ -65,7 +103,7 @@ function Navbar() {
             onMouseEnter={() => setShowModal(true)}
           >
             Login
-            {/* <FaRegCircleUser /> */}
+            {/*  */}
           </button>
 
           {showModal && (
