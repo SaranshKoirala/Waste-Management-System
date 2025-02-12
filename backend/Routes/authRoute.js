@@ -67,8 +67,8 @@ route.post("/login", async (req, res) => {
 
 route.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, cpassword } = req.body;
-    if (!name || !email || !password || !cpassword) {
+    const { name, email, password, confirmPassword } = req.body;
+    if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -77,7 +77,7 @@ route.post("/signup", async (req, res) => {
       return res.status({ message: "Password must be at least 6 characters!" });
 
     //checking if the password and confirm password match or not
-    if (password !== cpassword) {
+    if (password !== confirmPassword) {
       return res.status(400).json({ message: "Password do not match!" });
     }
 
@@ -87,10 +87,9 @@ route.post("/signup", async (req, res) => {
     }
 
     //user is created
-    const newUser = await User.create({ name, email, password });
-    res.status(201).json({ message: "User is Created.", data: newUser });
+    await User.create({ name, email, password });
+    res.status(201).json({ message: "User is Created." });
   } catch (error) {
-    console.log(error.message);
     if (error.code === 11000) {
       return res.status(400).json({ message: "Email already exist!" });
     }
