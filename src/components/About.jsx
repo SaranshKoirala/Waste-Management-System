@@ -1,6 +1,5 @@
-import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -22,12 +21,9 @@ function About() {
     }
   }
 
-  useEffect(() => {
-    AOS.init({ duration: 1000, easing: "ease-in-out" });
-  }, []);
   return (
-    <div id="about" className="h-screen px-30">
-      <div data-aos="fade-right" className="bona-nova-sc-regular mb-10">
+    <div id="about" className="h-screen px-30 mb-30" data-aos="fade-up">
+      <div className="bona-nova-sc-regular mb-10">
         <div className="font-semibold text-5xl text-center text-black">
           About Us
         </div>
@@ -55,7 +51,6 @@ function About() {
             src={`/gallery/gallery-${count}.webp`}
             width={"350px"}
             loading="lazy"
-            // height={"10px"}
           />
           <div className="flex gap-3">
             <div
@@ -104,10 +99,10 @@ function About() {
             disposal and recycling. Through our system, the government ensures
             that both residents and businesses have access to efficient waste
             management services that make a difference in maintaining a cleaner
-            Kathmandu. With the growing population of Kathmandu and the city's
-            increasing waste generation, our platform plays a crucial role in
-            tackling waste-related challenges, improving public health, and
-            protecting the environment for future generations.
+            Kathmandu. With the growing population of Kathmandu and the
+            city&apos;s increasing waste generation, our platform plays a
+            crucial role in tackling waste-related challenges, improving public
+            health, and protecting the environment for future generations.
           </p>
         </div>
       </div>

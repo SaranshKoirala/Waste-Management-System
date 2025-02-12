@@ -4,7 +4,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   function handleBtn() {
-    navigate("/");
+    navigate("/login");
   }
 
   return (

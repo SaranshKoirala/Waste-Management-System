@@ -4,9 +4,7 @@ import { FaTruck } from "react-icons/fa";
 import { FaRecycle } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
-import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 function Services() {
   const services = [
@@ -53,12 +51,9 @@ function Services() {
       icon: <FaLeaf className="text-l" />,
     },
   ];
-  useEffect(() => {
-    AOS.init({ duration: 1500, easing: "ease-in-out" });
-  }, []);
   return (
-    <section id="services" className="h-screen px-30 mb-10">
-      <div data-aos="fade-right" className="bona-nova-sc-regular mb-25">
+    <section id="services" className="h-screen px-30 mb-15" data-aos="fade-up">
+      <div className="bona-nova-sc-regular mb-25">
         <div className="font-semibold text-5xl text-center text-black">
           Our Services
         </div>

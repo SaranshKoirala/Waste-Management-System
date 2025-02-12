@@ -6,7 +6,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 
 function Contact() {
   return (
-    <div id="contact" className="h-screen flex flex-col items-center gap-20  ">
+    <div id="contact" className="h-screen flex flex-col items-center gap-20">
       <Subscribe />
       <div className="flex px-40 gap-20 bg-green-950 h-full justify-center items-center text-white rounded-t-4xl border-b-1 border-b-gray-600">
         <div className="text-sm text-white/70">

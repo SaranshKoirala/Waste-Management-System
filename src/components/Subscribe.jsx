@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import "aos/dist/aos.css";
 
 function Subscribe() {
   return (
-    <div className="flex flex-col justify-center items-center gap-5 p-20 ">
+    <div
+      className="flex flex-col justify-center items-center gap-5 p-20"
+      data-aos="fade-up"
+    >
       <div className="flex flex-col justify-center items-center gap-2">
         <h2 className="poppins-font text-6xl font-bold">
           Join the Green Revolution!

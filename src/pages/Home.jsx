@@ -6,11 +6,20 @@ import Hero from "../components/Hero";
 import Services from "../components/Services";
 import axios from "axios";
 import { UserContext } from "../Contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Home() {
   const { setUser, setIsAuthenticated } = useContext(UserContext);
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetch() {
+      AOS.init({
+        duration: 1000, // Animation duration (default: 400ms)
+        once: true, // Whether animation happens only once
+        easing: "ease-in-out", // Animation easing
+      });
       const token = localStorage.getItem("user");
       if (token) {
         try {
@@ -23,11 +32,12 @@ function Home() {
           setIsAuthenticated(true);
         } catch (error) {
           console.log("Error:", error.message);
+          navigate("*");
         }
       }
     }
     fetch();
-  }, []);
+  }, [navigate, setIsAuthenticated, setUser]);
   return (
     <div>
       <Hero />
