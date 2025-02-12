@@ -64,26 +64,31 @@ function Navbar() {
 
       {isAuthenticated ? (
         <div className="flex justify-center items-center gap-2">
+          <p>{user?.name.split(" ")[0]}</p>
           <div
             className="relative w-8 h-8 rounded-full bg-white text-black flex justify-center items-center text-xl cursor-pointer"
             onClick={handleShowModal}
           >
             <FiUser />
           </div>
+
           {showModal && (
             <div className="absolute top-14 right-5 bg-white text-black/70 flex flex-col justify-start px-3 py-2 w-50 rounded-sm">
-              <Link to={"/profile"} className="border-b-1 border-gray-300 ">
-                <p className=" text-center justify-self-start p-1">
-                  {user?.name}
-                </p>
+              <Link
+                to={"/profile"}
+                className="flex items-center cursor-pointer gap-2"
+              >
+                <FiUser className="text-l" />
+                <p className="p-1">Profile</p>
               </Link>
+              <div className="border-b-[0.1px] border-gray-400 "></div>
 
               <div
-                className="flex items-center cursor-pointer"
+                className="flex items-center cursor-pointer gap-2"
                 onClick={handleLogoutBtn}
               >
                 <IoLogOut className="text-xl" />
-                <p className="text-center p-1">Log Out</p>
+                <p className=" p-1">Log Out</p>
               </div>
             </div>
           )}

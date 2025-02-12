@@ -32,6 +32,7 @@ function Home() {
           setIsAuthenticated(true);
         } catch (error) {
           console.log("Error:", error.message);
+          localStorage.removeItem("user");
           navigate("*");
         }
       }
