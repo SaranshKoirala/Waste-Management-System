@@ -1,17 +1,44 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContext";
 
 function SchedulePickup() {
-  const [fullName, setFullName] = useState("Saransh Koirala");
-  const [email, setEmail] = useState("upwhats498@gmail.com");
+  const { setUser, setIsAuthenticated, user } = useContext(UserContext);
+  const name = user?.name;
+  const email = user?.email;
+
+  const navigate = useNavigate();
+
   const [contact, setContact] = useState("");
   const [streetName, setStreetName] = useState("");
   const [wardNumber, setWardNumber] = useState(0);
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("Morning");
   const [wasteType, setWasteType] = useState("Biodegradable");
-
   const isOpen = contact || streetName || wardNumber || pickupDate;
+
+  useEffect(() => {
+    async function fetch() {
+      const token = localStorage.getItem("user");
+      if (token) {
+        try {
+          const response = await axios.get("http://localhost:3000/api/auth", {
+            headers: {
+              Authorization: token,
+            },
+          });
+          setUser(response.data.user);
+          setIsAuthenticated(true);
+        } catch (error) {
+          console.log("Error:", error.message);
+          localStorage.removeItem("user");
+          navigate("*");
+        }
+      }
+    }
+    fetch();
+  }, [navigate, setUser, setIsAuthenticated]);
 
   function handleContactNumber(e) {
     const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
@@ -28,29 +55,42 @@ function SchedulePickup() {
     setWasteType("Biodegradable");
   }
 
-  function handleSubmitBtn(e) {
+  async function handleSubmitBtn(e) {
     e.preventDefault();
 
-    if (contact.length > 10) {
+    if (contact.length !== 10) {
       alert("Invalid contact number!");
       return;
     } else if (wardNumber > 35 || wardNumber === 0) {
       alert("Invalid ward number!");
       return;
     } else {
-      alert("Form submitted sucessfully!");
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/schedulepickup",
+          {
+            name,
+            email,
+            contact,
+            streetName,
+            wardNumber,
+            pickupDate,
+            pickupTime,
+            wasteType,
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem("user"),
+            },
+          }
+        );
+        alert("Pickup is Scheduled!!");
+        navigate("/");
+      } catch (error) {
+        alert(error.response?.data?.message);
+      }
     }
 
-    const formData = {
-      fullName,
-      email,
-      contact,
-      streetName,
-      wardNumber,
-      pickupDate,
-      pickupTime,
-      wasteType,
-    };
     handleCancelBtn(e);
   }
 
@@ -87,8 +127,8 @@ function SchedulePickup() {
             <label>Full Name</label>
             <input
               type="text"
-              value={fullName}
               className="border rounded-sm p-1"
+              defaultValue={user?.name}
               disabled
               required
             />
@@ -97,8 +137,8 @@ function SchedulePickup() {
             <label>Email</label>
             <input
               type="email"
-              value={email}
               className="border rounded-sm p-1"
+              defaultValue={user?.email}
               disabled
               required
             />
@@ -129,7 +169,7 @@ function SchedulePickup() {
               className="border rounded-sm p-1"
               type="number"
               value={wardNumber}
-              onChange={(e) => Number(setWardNumber(e.target.value))}
+              onChange={(e) => parseInt(setWardNumber(e.target.value))}
               required
             />
           </div>

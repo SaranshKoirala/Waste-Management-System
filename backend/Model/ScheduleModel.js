@@ -8,10 +8,10 @@ const schedulePickupSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    // unique: true,
   },
   contact: {
-    type: Number,
+    type: String,
     required: true,
   },
   streetName: {

@@ -3,6 +3,7 @@ import validator from "validator";
 import User from "../model/UserModel.js";
 import bcrypt from "bcryptjs";
 import tokenAuth from "../middleware/tokenAuth.js";
+import SchedulePickup from "../model/ScheduleModel.js";
 
 const route = express.Router();
 
@@ -18,11 +19,53 @@ route.get("/", tokenAuth, (req, res) => {
 });
 
 //schedule route
-// route.post("/schedulepickup", tokenAuth, (req, res)=>{
-//   try{
-//     const {fullName, email, contact, streetName, wardNumber, pickupDate, pickupTime} = req.body;
-//   }
-// })
+route.post("/schedulepickup", tokenAuth, async (req, res) => {
+  try {
+    if (!req.user) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No user data found" });
+    }
+    const { name, email } = req.user;
+
+    const {
+      contact,
+      streetName,
+      wardNumber,
+      pickupDate,
+      pickupTime,
+      wasteType,
+    } = req.body;
+
+    if (
+      !name ||
+      !email ||
+      !contact ||
+      !streetName ||
+      !wardNumber ||
+      !pickupDate ||
+      !pickupTime ||
+      !wasteType
+    ) {
+      return res.status(400).json({ message: "Enter full details!" });
+    }
+
+    await SchedulePickup.create({
+      name,
+      email,
+      contact,
+      streetName,
+      wardNumber,
+      pickupDate,
+      pickupTime,
+      wasteType,
+    });
+    res.status(201).json({ message: "Pickup is scheduled!" });
+  } catch (error) {
+    console.error("Error scheduling pickup:", error);
+    res.status(500).json({ message: "Couldn't schedule your pickup!" });
+  }
+});
 
 route.post("/login", async (req, res) => {
   try {
