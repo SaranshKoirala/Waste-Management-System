@@ -17,6 +17,13 @@ route.get("/", tokenAuth, (req, res) => {
   }
 });
 
+//schedule route
+// route.post("/schedulepickup", tokenAuth, (req, res)=>{
+//   try{
+//     const {fullName, email, contact, streetName, wardNumber, pickupDate, pickupTime} = req.body;
+//   }
+// })
+
 route.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;

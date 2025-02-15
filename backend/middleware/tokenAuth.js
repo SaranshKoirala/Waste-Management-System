@@ -16,8 +16,8 @@ const tokenAuth = async (req, res, next) => {
     }
     req.user = user;
     next(); // Call the next middleware or route handler
-  } catch (err) {
-    res.status(401).json({ message: "Unauthorized: Invalid or expired token" });
+  } catch (error) {
+    res.status(401).json({ message: error.message });
   }
 };
 

@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import UserRoute from "./routes/UserRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
+import SchedulePickupRoute from "./routes/SchudulePickupRoute.js";
 import cors from "cors";
+// import SchedulePickup from "./model/ScheduleModel.js";
 
 dotenv.config();
 const app = express();
@@ -18,6 +20,7 @@ app.use(cors());
 // Routes
 app.use("/api/user", UserRoute);
 app.use("/api/auth", AuthRoute);
+app.use("/api/schedulePickup", SchedulePickupRoute);
 
 //Invalid routes
 app.use((req, res) => {
