@@ -1,13 +1,46 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
+import { UserContext } from "../Contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function AdminLogin() {
   const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser, setIsAuthenticated } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function handleShowPassword(e) {
     e.preventDefault();
     setIsOpen((isOpen) => !isOpen);
+  }
+
+  async function handleLoginBtn(e) {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        { email, password }
+      );
+
+      if (response.data.user.role !== "admin") {
+        throw new Error("Access Denied!!");
+      }
+      setUser(response.data.user);
+      localStorage.setItem("admin", response.data.token);
+      setIsAuthenticated(true);
+      setEmail("");
+      setPassword("");
+      navigate("/admin");
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Access Denied!!");
+      }
+    }
   }
   return (
     <div className="flex justify-center items-center w-[100%] h-screen gap-5 ">
@@ -33,6 +66,8 @@ function AdminLogin() {
             <input
               type="text"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="border border-gray-400 rounded-xl h-10 p-3 w-96 focus:outline-green-600 focus:placeholder-transparent"
             />
           </div>
@@ -41,6 +76,8 @@ function AdminLogin() {
             <input
               type={isOpen ? "text" : "password"}
               placeholder="******"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="relative border border-gray-400 rounded-xl h-10 p-3 w-96 focus:outline-green-600 focus:placeholder-transparent"
             />
             <button
@@ -62,6 +99,7 @@ function AdminLogin() {
           <button
             type="submit"
             className="bg-green-600/70 text-white rounded-xl h-10 mb-4 w-96 cursor-pointer"
+            onClick={handleLoginBtn}
           >
             Login
           </button>

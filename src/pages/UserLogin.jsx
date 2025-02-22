@@ -26,10 +26,13 @@ function UserLogin() {
         "http://localhost:3000/api/auth/login",
         { email, password }
       );
+
+      if (response.data.user.role !== "user") {
+        throw new Error("Access Denied!!");
+      }
       setUser(response.data.user);
       localStorage.setItem("user", response.data.token);
       setIsAuthenticated(true);
-      // setIsLoggedIn(true);
       setEmail("");
       setPassword("");
       navigate("/");
@@ -37,7 +40,7 @@ function UserLogin() {
       if (error.response) {
         alert(error.response.data.message);
       } else {
-        alert("Something went wrong!");
+        alert("Access Denied!!");
       }
     }
   }

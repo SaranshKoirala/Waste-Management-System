@@ -117,7 +117,7 @@ route.post("/login", async (req, res) => {
 
 route.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword, role } = req.body;
     if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -137,7 +137,7 @@ route.post("/signup", async (req, res) => {
     }
 
     //user is created
-    await User.create({ name, email, password });
+    await User.create({ name, email, password, role });
     res.status(201).json({ message: "User is Created." });
   } catch (error) {
     if (error.code === 11000) {
