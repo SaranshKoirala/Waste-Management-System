@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import Signup from "./pages/Signup";
@@ -24,6 +24,7 @@ function App() {
 
       {/* Admin routes */}
       <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="users" element={<Users />} />
       </Route>

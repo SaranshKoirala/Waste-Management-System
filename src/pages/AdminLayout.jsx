@@ -7,11 +7,38 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useState } from "react";
 
 function AdminLayout() {
-  const [clicked, setClicked] = useState(false);
+  const [active, setActive] = useState(0);
 
-  function handleClick() {
-    setClicked((clicked) => !clicked);
+  function handleActive(index) {
+    setActive(index);
   }
+
+  const list = [
+    {
+      id: 0,
+      logo: <MdDashboard />,
+      content: "Dashboard",
+      to: "dashboard",
+    },
+    {
+      id: 1,
+      logo: <HiUsers />,
+      content: "Schedules",
+      to: "schedules",
+    },
+    {
+      id: 2,
+      logo: <GrSchedules />,
+      content: "Users",
+      to: "users",
+    },
+    {
+      id: 3,
+      logo: <IoMdSettings />,
+      content: "Settings",
+      to: "settings",
+    },
+  ];
 
   return (
     <div className="flex gap-10 h-screen w-screen bg-gray-200 ">
@@ -23,37 +50,23 @@ function AdminLayout() {
           </p>
         </div>
         <ul className="flex flex-col gap-4 justify-center ">
-          <Link
-            to={"/admin/dashboard"}
-            className="hover:text-white hover:bg-green-600 focus:text-white focus:bg-green-600 outline-none  rounded-lg py-1.5 px-4"
-          >
-            <li className="flex items-center gap-2 ">
-              {" "}
-              <MdDashboard />
-              Dashboard
-            </li>
-          </Link>
-          <Link
-            to={"/admin/users"}
-            className="hover:text-white hover:bg-green-600 focus:text-white focus:bg-green-600 outline-none rounded-lg py-1.5 px-4"
-          >
-            <li className="flex items-center gap-2">
-              <HiUsers />
-              Users
-            </li>
-          </Link>
-          <Link className="hover:text-white hover:bg-green-600 focus:text-white focus:bg-green-600 outline-none rounded-lg py-1.5 px-4">
-            <li className="flex items-center gap-2">
-              <GrSchedules />
-              Schedules
-            </li>
-          </Link>
-          <Link className="hover:text-white hover:bg-green-600 focus:text-white focus:bg-green-600 outline-none rounded-lg py-1.5 px-4">
-            <li className="flex items-center gap-2">
-              <IoMdSettings />
-              Settings
-            </li>
-          </Link>
+          {list.map((element, index) => (
+            <Link
+              key={element.id}
+              to={element.to}
+              className={
+                index === active
+                  ? "bg-green-600 text-white rounded-lg py-1.5 px-4"
+                  : "hover:text-white hover:bg-green-600 rounded-lg py-1.5 px-4"
+              }
+              onClick={() => handleActive(index)}
+            >
+              <li className="flex items-center gap-2">
+                {element.logo}
+                {element.content}
+              </li>
+            </Link>
+          ))}
         </ul>
         <div className="flex items-center gap-2 mt-auto py-1.5 px-4">
           <IoLogOutOutline />
