@@ -8,6 +8,8 @@ import AdminLogin from "./pages/AdminLogin";
 import SchedulePickup from "./pages/SchedulePickup";
 import UserProfile from "./pages/UserProfile";
 import AdminLayout from "./pages/AdminLayout";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/Users";
 
 function App() {
   return (
@@ -19,7 +21,12 @@ function App() {
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/schedulepickup" element={<SchedulePickup />} />
       <Route path="/subscribe" element={<Subscription />} />
-      <Route path="/admin" element={<AdminLayout />}></Route>
+
+      {/* Admin routes */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="users" element={<Users />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
