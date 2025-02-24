@@ -10,6 +10,8 @@ import UserProfile from "./pages/UserProfile";
 import AdminLayout from "./pages/AdminLayout";
 import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
+import Setting from "./components/Setting";
+import Schedules from "./components/Schedules";
 
 function App() {
   return (
@@ -26,7 +28,9 @@ function App() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="schedules" element={<Schedules />} />
         <Route path="users" element={<Users />} />
+        <Route path="setting" element={<Setting />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
