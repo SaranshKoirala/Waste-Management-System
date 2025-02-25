@@ -46,8 +46,8 @@ function AdminLayout() {
     {
       id: 3,
       logo: <IoMdSettings />,
-      content: "Setting",
-      to: "setting",
+      content: "Settings",
+      to: "settings",
     },
   ];
 

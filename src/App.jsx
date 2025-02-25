@@ -30,7 +30,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="schedules" element={<Schedules />} />
         <Route path="users" element={<Users />} />
-        <Route path="setting" element={<Setting />} />
+        <Route path="settings" element={<Setting />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
