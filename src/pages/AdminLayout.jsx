@@ -1,12 +1,16 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { HiUsers } from "react-icons/hi";
 import { GrSchedules } from "react-icons/gr";
 import { IoMdSettings } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { UserContext } from "../Contexts/UserContext";
 
 function AdminLayout() {
+  const { setUser, setIsAuthenticated } = useContext(UserContext);
+  const navigate = useNavigate();
   const [active, setActive] = useState(0);
 
   function handleActive(index) {
@@ -39,6 +43,36 @@ function AdminLayout() {
       to: "setting",
     },
   ];
+
+  useEffect(() => {
+    async function fetch() {
+      // AOS.init({
+      //   duration: 1000, // Animation duration (default: 400ms)
+      //   once: true, // Whether animation happens only once
+      //   easing: "ease-in-out", // Animation easing
+      // });
+      const token = localStorage.getItem("admin");
+      if (!token) {
+        console.warn("No token found");
+        navigate("*");
+        return; // Stop execution if no token
+      }
+      try {
+        const response = await axios.get("http://localhost:3000/api/auth", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.log("Error:", error.message);
+        localStorage.removeItem("admin");
+        navigate("*");
+      }
+    }
+    fetch();
+  }, [navigate, setIsAuthenticated, setUser]);
 
   return (
     <div className="flex gap-10 h-screen w-screen bg-gray-200 ">
