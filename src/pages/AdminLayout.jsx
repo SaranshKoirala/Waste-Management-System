@@ -17,6 +17,13 @@ function AdminLayout() {
     setActive(index);
   }
 
+  function handleLogoutBtn() {
+    localStorage.removeItem("admin");
+    setUser(null);
+    setIsAuthenticated(false);
+    navigate("/login/admin");
+  }
+
   const list = [
     {
       id: 0,
@@ -102,10 +109,13 @@ function AdminLayout() {
             </Link>
           ))}
         </ul>
-        <div className="flex items-center gap-2 mt-auto py-1.5 px-4">
+        <button
+          className="flex items-center gap-2 mt-auto py-1.5 px-4 cursor-pointer"
+          onClick={handleLogoutBtn}
+        >
           <IoLogOutOutline />
           Logout
-        </div>
+        </button>
       </nav>
       <div>
         <Outlet />
