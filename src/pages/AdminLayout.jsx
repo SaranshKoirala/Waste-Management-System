@@ -9,7 +9,7 @@ import axios from "axios";
 import { UserContext } from "../Contexts/UserContext";
 
 function AdminLayout() {
-  const { setUser, setIsAuthenticated } = useContext(UserContext);
+  const { setUser, setIsAuthenticated, user } = useContext(UserContext);
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
 
@@ -53,11 +53,6 @@ function AdminLayout() {
 
   useEffect(() => {
     async function fetch() {
-      // AOS.init({
-      //   duration: 1000, // Animation duration (default: 400ms)
-      //   once: true, // Whether animation happens only once
-      //   easing: "ease-in-out", // Animation easing
-      // });
       const token = localStorage.getItem("admin");
       if (!token) {
         console.warn("No token found");
@@ -82,8 +77,8 @@ function AdminLayout() {
   }, [navigate, setIsAuthenticated, setUser]);
 
   return (
-    <div className="flex gap-10 h-screen w-screen bg-gray-200 ">
-      <nav className="py-5 px-8 h-screen bg-white flex flex-col gap-15 ">
+    <div className="flex h-screen w-screen bg-gray-200 ">
+      <nav className="py-5 px-8 w-65 h-screen bg-white flex flex-col gap-15 ">
         <div className="w-50 text-center">
           <p className="text-5xl font-extrabold text-green-600">Waste</p>
           <p className=" text-green-600 font-semibold -m-2">
@@ -117,7 +112,17 @@ function AdminLayout() {
           Logout
         </button>
       </nav>
-      <div>
+      <div className="flex flex-1 flex-col ">
+        <header className="flex bg-white h-14 items-center justify-end p-3">
+          <div className=" flex justify-center items-center gap-2">
+            <p className="poppins-font text-sm">{user?.name}</p>
+            <img
+              src="/admin-profile.jpg"
+              alt="Admin profile picture"
+              className="w-9 h-9 rounded-full cursor-pointer"
+            />
+          </div>
+        </header>
         <Outlet />
       </div>
     </div>
