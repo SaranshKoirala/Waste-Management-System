@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 function Schedules() {
   const [active, setActive] = useState(0);
   const [schedules, setSchedules] = useState(null);
+  const [status, setStatus] = useState(null);
 
   function handleActiveBtn(id) {
     setActive(id);
+    if (id === 0) {
+      setStatus(null);
+    } else {
+      id === 1 ? setStatus("Confirmed") : setStatus("Unconfirmed");
+    }
   }
 
   const btns = [
@@ -18,9 +24,13 @@ function Schedules() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/schedulePickup"
-        );
+        let url;
+        if (status) {
+          url = `http://localhost:3000/api/schedulePickup?status=${status}`;
+        } else {
+          url = "http://localhost:3000/api/schedulePickup";
+        }
+        const response = await axios.get(url);
         setSchedules(response.data.data);
       } catch (error) {
         console.log(error.message);
@@ -28,9 +38,7 @@ function Schedules() {
     }
 
     fetchData();
-  }, []);
-
-  console.log(schedules);
+  }, [status]);
 
   return (
     <div className="flex flex-col gap-10 w-full py-10 px-15 poppins-font">
@@ -53,31 +61,37 @@ function Schedules() {
         </div>
       </div>
 
-      <table className="border border-gray-500 w-full">
-        <thead>
-          <tr className="border-b">
-            <th className="p-3 text-start">Name</th>
-            <th className="p-3 text-start">Contact</th>
-            <th className="p-3 text-start">Pickup Date</th>
-            <th className="p-3 text-start">Location</th>
-            <th className="p-3 text-start">Waste Type</th>
-            <th className="p-3 text-start">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {schedules?.map((element, index) => (
-            <tr key={index} className="bg-white border-b border-gray-500">
-              <td className="p-3 text-start">{element.name}</td>
-
-              <td className="p-3 text-start">{element.contact}</td>
-              <td className="p-3 text-start">{element.pickupDate}</td>
-              <td className="p-3 text-start">{element.streetName}</td>
-              <td className="p-3 text-start">{element.wasteType}</td>
-              <td className="p-3 text-start">Unconfirmed</td>
+      {schedules ? (
+        <table className="border border-gray-500 w-full">
+          <thead>
+            <tr className="border-b">
+              <th className="p-3 text-start">Name</th>
+              <th className="p-3 text-start">Contact</th>
+              <th className="p-3 text-start">Pickup Date</th>
+              <th className="p-3 text-start">Location</th>
+              <th className="p-3 text-start">Waste Type</th>
+              <th className="p-3 text-start">Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {schedules?.map((element, index) => (
+              <tr key={index} className="bg-white border-b border-gray-500">
+                <td className="p-3 text-start">{element.name}</td>
+
+                <td className="p-3 text-start">{element.contact}</td>
+                <td className="p-3 text-start">{element.pickupDate}</td>
+                <td className="p-3 text-start">{element.streetName}</td>
+                <td className="p-3 text-start">{element.wasteType}</td>
+                <td className="p-3 text-start">{element.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="poppins-font font-semibold text-3xl text-center">
+          No Schedules Found!
+        </p>
+      )}
     </div>
   );
 }

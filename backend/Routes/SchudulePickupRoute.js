@@ -5,10 +5,20 @@ const route = express.Router();
 
 route.get("/", async (req, res) => {
   try {
-    const schedulePickups = await SchedulePickup.find();
+    const { status } = req.query;
+    let filter = {};
+
+    if (status) {
+      // filter.status = { $regex: new RegExp(`^${status}$`, "i") };
+      filter.status = status;
+    }
+
+    const schedulePickups = await SchedulePickup.find(filter);
     const length = schedulePickups.length;
     if (length === 0) {
-      return res.status(404).json({ message: "No Schedule found!" });
+      return res
+        .status(200)
+        .json({ message: "No Schedule found!", data: null });
     }
     res.status(200).json({ message: "Success", data: schedulePickups });
   } catch (error) {

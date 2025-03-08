@@ -36,6 +36,11 @@ const schedulePickupSchema = new mongoose.Schema({
     enum: ["Biodegradable", "Non-Biodegradable"],
     default: "Biodegradable",
   },
+  status: {
+    type: String,
+    enum: ["Confirmed", "Unconfirmed"],
+    default: "Unconfirmed",
+  },
 });
 
 const SchedulePickup = mongoose.model("SchedulePickup", schedulePickupSchema);
